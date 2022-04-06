@@ -4,8 +4,6 @@ package edu.nyu.crypto.miners;
 import edu.nyu.crypto.blockchain.Block;
 import edu.nyu.crypto.blockchain.NetworkStatistics;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class FeeSnipingMiner extends CompliantMiner implements Miner {
     protected Block currentHead;
