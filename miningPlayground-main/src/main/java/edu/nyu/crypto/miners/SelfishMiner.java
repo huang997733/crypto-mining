@@ -26,6 +26,7 @@ public class SelfishMiner extends CompliantMiner implements Miner {
 
 	@Override
 	public void blockMined(Block block, boolean isMinerMe) {
+		// own more than 25% hash power, start selfish mining
 		if (myShare > 0.25) {
 			if(isMinerMe) {
 				if (block.getHeight() > secretBlock.getHeight()) {
@@ -36,9 +37,11 @@ public class SelfishMiner extends CompliantMiner implements Miner {
 				if (block.getHeight() > currentHead.getHeight()) {
 					currentHead = block;
 					int lead = secretBlock.getHeight() - block.getHeight();
+					// publish secret block
 					if (lead == 1 || lead == 0) {
 						currentHead = secretBlock;
 					}
+					// not in lead, update our secret block
 					if (lead < 0) {
 						secretBlock = currentHead;
 					}
@@ -46,17 +49,9 @@ public class SelfishMiner extends CompliantMiner implements Miner {
 			}
 		}
 		else {
-			if (isMinerMe) {
-				if (block.getHeight() > secretBlock.getHeight()) {
-					secretBlock = block;
-					currentHead = block;
-				}
-			}
-			else{
-				if (block.getHeight() > secretBlock.getHeight()) {
-					secretBlock = block;
-					currentHead = block;
-				}
+			if (block.getHeight() > secretBlock.getHeight()) {
+				secretBlock = block;
+				currentHead = block;
 			}
 		}
 	}

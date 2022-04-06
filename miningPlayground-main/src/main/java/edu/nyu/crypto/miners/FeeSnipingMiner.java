@@ -8,7 +8,7 @@ import edu.nyu.crypto.blockchain.NetworkStatistics;
 public class FeeSnipingMiner extends CompliantMiner implements Miner {
     protected Block currentHead;
     protected double myShare;
-    protected int minimumValue = 8;
+    protected int minimumValue = 8; // minimum block value to perform fee sniping
 
     public FeeSnipingMiner(String id, int hashRate, int connectivity) {
         super(id, hashRate, connectivity);
@@ -40,6 +40,7 @@ public class FeeSnipingMiner extends CompliantMiner implements Miner {
                 if (block.getBlockValue() < minimumValue) {
                     this.currentHead = block;
                 } else {
+                    // mine from the previous block
                     if (block.getPreviousBlock() != null) {
                         this.currentHead = block.getPreviousBlock();
                     } else {

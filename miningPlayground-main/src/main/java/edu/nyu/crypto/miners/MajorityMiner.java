@@ -31,6 +31,7 @@ public class MajorityMiner extends CompliantMiner implements Miner {
             }
         }
         else {
+            // miner is not me, and we don't have majority hash power, accept the block
             if (block.getHeight() > currentHead.getHeight() && myShare < 0.5) {
                 this.currentHead = block;
             }
