@@ -10,8 +10,7 @@ import java.util.Collections;
 public class FeeSnipingMiner extends CompliantMiner implements Miner {
     protected Block currentHead;
     protected double myShare;
-//    protected ArrayList<Double> values = new ArrayList<>();
-//    protected double medium;
+    protected int minimumValue = 8;
 
     public FeeSnipingMiner(String id, int hashRate, int connectivity) {
         super(id, hashRate, connectivity);
@@ -32,13 +31,6 @@ public class FeeSnipingMiner extends CompliantMiner implements Miner {
 
     @Override
     public void blockMined(Block block, boolean isMinerMe) {
-//        if (values.size() < 2000){
-//            values.add(block.getBlockValue());
-//            Collections.sort(values);
-//            medium = values.get(values.size()/2);
-//        } else {
-//            values.clear();
-//        }
 
         if(isMinerMe) {
             if (block.getHeight() > currentHead.getHeight()) {
@@ -47,7 +39,7 @@ public class FeeSnipingMiner extends CompliantMiner implements Miner {
         }
         else {
             if (block.getHeight() > currentHead.getHeight()) {
-                if (block.getBlockValue() < 8) {
+                if (block.getBlockValue() < minimumValue) {
                     this.currentHead = block;
                 } else {
                     if (block.getPreviousBlock() != null) {
