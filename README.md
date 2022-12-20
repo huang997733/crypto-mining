@@ -3,6 +3,8 @@
 ## Introduction
 This project simulates the mining process of proof of work cryptocurrencies like Bitcoin with different mining strategies.
 
+Team with Tianyu Huang https://github.com/TianyuHuang-000
+
 ## Mining Strategies
 1. Majority Mining
 
